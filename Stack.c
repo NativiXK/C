@@ -19,9 +19,6 @@ typedef struct stStack
 stStack *stack = NULL;
 
 // Functions
-void free_stack(stStack* stack);
-void free_node(stNode* node);
-
 void push(stStack* stack, int value);
 int pop(stStack* stack);
 int peek(stStack* stack);
