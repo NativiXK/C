@@ -19,6 +19,8 @@ stQueue* new_queue ();
 
 int enqueue (stQueue* queue, int value);
 stNode* dequeue (stQueue* queue);
+stNode* peekFirst (stQueue* queue);
+stNode* peekLast (stQueue* queue);
 
 void print_queue(stQueue* queue);
 void print_node(stNode* node);
@@ -40,10 +42,15 @@ int main()
     
     print_queue(queue);//5 - 10 - 0 - 25 - 52
     
-    dequeue(queue); // remove 5
-    dequeue(queue); // remove 10
+    stNode* node = NULL;
     
-    print_queue(queue); //0 - 25 - 52
+    node = dequeue(queue); // remove 5
+    
+    print_queue(queue); //10 - 0 - 25 - 52
+    
+    enqueue(queue, node->value);
+    
+    print_queue(queue);//10 - 0 - 25 - 52 - 5
     
     free_queue(queue);
 
@@ -94,14 +101,22 @@ stNode* dequeue (stQueue* queue) {
     if (queue->first == NULL) return NULL;
     
     stNode* node = queue->first;
+    queue->first = node->next;
     node->next = NULL;
-    
-    queue->first = queue->first->next;
-    
     return node;
 }
 
-stNode
+stNode* peekFirst (stQueue* queue) {
+    if (queue->first == NULL) return NULL;
+    
+    return queue->first;
+}
+
+stNode* peekLast (stQueue* queue) {
+    if (queue->last == NULL) return NULL;
+    
+    return queue->last;
+}
 
 void print_queue(stQueue* queue) {
     if (queue->first == NULL) return;
